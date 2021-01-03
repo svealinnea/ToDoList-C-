@@ -35,11 +35,14 @@ namespace ToDoList.Controllers
 //       return RedirectToAction("Index");
 //     }
 
-//     public ActionResult Details(int id)
-//     {
-//       Item thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
-//       return View(thisItem);
-//     }
+    public ActionResult Details(int id)
+    {
+      var thisItem = _db.Items
+            .Include(item => item.Categories) //.Include(item => item.Categories) to load the Categories property of each Item. However, the Categories property on an Item is actually a collection of join entities, each of type ICollection<CategoryItem>. These are not the actual categories related to an Item.
+            .ThenInclude(join => join.Category) //ThenInclude() method to load the Category of each CategoryItem. Remember that a CategoryItem is simply a reference to a relationship. Each CategoryItem includes the id of an Item as well as the id of a Category. We are actually returning the associated Category of a CategoryItem here.
+            .FirstOrDefault(item => item.ItemId == id); // FirstOrDefault() method specifies which item from the database we're working with.
+      return View(thisItem);
+    }
 
 //     public ActionResult Edit(int id)
 //     {
