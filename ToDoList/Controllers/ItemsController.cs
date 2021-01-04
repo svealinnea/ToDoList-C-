@@ -48,20 +48,20 @@ namespace ToDoList.Controllers
       return View(thisItem);
     }
 
-//     public ActionResult Edit(int id)
-//     {
-//       var thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
-//       ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
-//       return View(thisItem);
-//     }
+    public ActionResult Edit(int id)
+    {
+      var thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+      return View(thisItem);
+    }
 
-//     [HttpPost]
-//     public ActionResult Edit(Item item)
-//     {
-//       _db.Entry(item).State = EntityState.Modified;
-//       _db.SaveChanges();
-//       return RedirectToAction("Index");
-//     }
+    [HttpPost]
+    public ActionResult Edit(Item item)
+    {
+      _db.Entry(item).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
 //     public ActionResult Delete(int id)
 //     {
