@@ -22,6 +22,20 @@ else
     }
   </ul>
 }
+
+  <ul>
+  @foreach(var join in Model.Categories)
+  {
+    <li>@join.Category.Name</li>
+    @using (Html.BeginForm("DeleteCategory", "Items"))
+    {
+      @Html.Hidden("joinId", @join.CategoryItemId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+  
+<p>@Html.ActionLink("Add a Category", "AddCategory", new { id = Model.ItemId })</p>
 <p>@Html.ActionLink("Back to list", "Index")</p>
 <p>@Html.ActionLink("Edit Item", "Edit", new { id = Model.ItemId })</p>
 <p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.ItemId })</p>
