@@ -27,7 +27,7 @@ else
   @foreach(var join in Model.Categories)
   {
     <li>@join.Category.Name</li>
-    @using (Html.BeginForm("DeleteCategory", "Items"))
+    @using (Html.BeginForm("DeleteCategory", "Items")) // route to controller
     {
       @Html.Hidden("joinId", @join.CategoryItemId)
       <input type="submit" value="Delete"/>
